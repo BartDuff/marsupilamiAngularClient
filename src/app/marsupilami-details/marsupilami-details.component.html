@@ -1,0 +1,21 @@
+<p *ngIf="!marsupilami">Chargement en cours...</p>
+<div class="card big" *ngIf="marsupilami">
+  <div class="card-content">
+    <h4 class="lime lighten-2">Détails sur le Marsupilami:</h4>
+    <span class="card-title">Nom: {{ marsupilami.login }}</span>
+    <p>Famille: {{ marsupilami.famille }}</p>
+    <p>Race: {{ marsupilami.race}}</p>
+    <p>Nourriture: {{ marsupilami.nourriture}}</p>
+    <div class="card-action">
+      <a routerLink="/marsupilamis" class="btn btn-lg btn-primary center-align">
+        Retour
+      </a>
+      <button (click)="addFriend(marsupilami)" class="btn btn-lg btn-primary center-align">
+        Ajouter
+      </button>
+      <button (click)="deleteFriend(marsupilami)" class="btn btn-lg btn-primary center-align">
+        Supprimer
+        </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="center-align">
+  <h2 class="lime lighten-2 z-depth-3">Inscription</h2>
+  <form [formGroup]="marsuForm" (ngSubmit)="addMarsupilami()">
+    <div class="form-group">
+      <label for="login">Login:</label>
+      <input type="text" class="form-control" [ngClass]="{ 'invalid': !marsuForm.controls.login.valid && marsuForm.controls.login.dirty }"
+        id="login" formControlName="login">
+      <div *ngIf="!marsuForm.controls.login.valid && marsuForm.controls.login.dirty">
+        Le nom du Marsupilami est obligatoire!
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="mdp">Mot de passe: </label>
+      <input type="password" class="form-control" id="mdp" formControlName="mdp" [ngClass]="{ 'invalid': !marsuForm.controls.mdp.valid && marsuForm.controls.mdp.dirty }">
+    </div>
+    <div *ngIf="!marsuForm.controls.mdp.valid && marsuForm.controls.mdp.dirty">
+      Le mot de passe est obligatoire!
+    </div>
+    <div class="form-group">
+      <label for="date_naissance">Date de Naissance:</label>
+      <input type="text" class="form-control" id="date_naissance" formControlName="date_naissance">
+    </div>
+    <div class="form-group">
+      <label for="famille">Famille: </label>
+      <input type="text" class="form-control" id="famille" formControlName="famille">
+    </div>
+    <div class="form-group">
+      <label for="race">Race :</label>
+      <input type="text" class="form-control" id="race" formControlName="race">
+    </div>
+    <div class="form-group">
+      <label for="nourriture">Nourriture: </label>
+      <input type="text" class="form-control" id="nourriture" formControlName="nourriture">
+    </div>
+    <button class="btn waves-effect waves-light pulse" type="submit" name="action" [disabled]="!marsuForm.valid">
+      Inscription
+    </button>
+  </form>
+</div>

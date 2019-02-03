@@ -1,0 +1,11 @@
+<a ref="#!" class="brand-logo left"><img class="logo "src="../../assets/images/marsupilami.png"/></a>
+<a href="#!" class="brand-logo center">MarsupilAmi</a>
+<ul class="right hide-on-med-and-down">
+  <li><a routerLink="/login" *ngIf="!isAuth">Login</a></li>
+  <li><a (click)="onLogout()" *ngIf="isAuth">Logout</a></li>
+  <li><a routerLink="/registration" *ngIf="!isAuth">Inscription</a></li>
+  <li><a routerLink="/marsupilamis/{{ currentUser._id }}" *ngIf="isAuth">{{currentUser.login}}</a></li>
+  <li><a routerLink="/edit_marsupilami/{{ currentUser._id }}" *ngIf="isAuth">Editer</a></li>
+  <li><a routerLink="/amis" *ngIf="isAuth">Amis</a></li>
+  <li><a routerLink="/marsupilamis" *ngIf="isAuth">Marsupilamis</a></li>
+</ul>
