@@ -7,7 +7,7 @@ import { Marsupilami } from './marsupilami';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  isAuth;
+  isAuth: boolean;
   isAuthChange: Subject<boolean> = new Subject<boolean>();
   currentUser: Marsupilami;
   isCurrentUser: Subject<Marsupilami> = new Subject<Marsupilami>();
@@ -15,24 +15,25 @@ export class AuthenticationService {
   private apiLogin = '/api/login';
   private apiLogout = '/api/logout';
   constructor(private http: HttpClient) {
-    this.isAuthChange.subscribe((value) => {
-      this.isAuth = value;
-    });
-    this.isCurrentUser.subscribe((value) => {
-      this.currentUser = value;
-    });
-   }
+    this.isAuth= false;
+    this.currentUser = null;
+  }
+
+  emitCredentials(){
+    this.isAuthChange.next(this.isAuth);
+    this.isCurrentUser.next(this.currentUser);
+  }
 
   login(body: any): Observable<any> {
     this.isAuth = true;
-    this.isAuthChange.next(this.isAuth);
+    this.emitCredentials();
     return this.http.post(`${this.apiLogin}`, body);
   }
 
   logout() {
     this.isAuth = false;
-    this.isAuthChange.next(this.isAuth);
-    this.isCurrentUser.next(null);
+    this.currentUser = null;
+    this.emitCredentials();
     return this.http.get(`${this.apiLogout}`);
   }
 }

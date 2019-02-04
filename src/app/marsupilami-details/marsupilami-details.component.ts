@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MarsupilamiService } from '../marsupilami.service';
 import { FriendService } from '../friend.service';
 import { AuthenticationService } from '../authentication.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-marsupilami-details',
@@ -11,6 +12,7 @@ import { AuthenticationService } from '../authentication.service';
   styleUrls: ['./marsupilami-details.component.css']
 })
 export class MarsupilamiDetailsComponent implements OnInit {
+  userSubscription: Subscription;
   currentUser: Marsupilami;
   marsupilami: Marsupilami;
 
@@ -22,8 +24,12 @@ export class MarsupilamiDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.getMarsuDetails();
-    this.getCurrentUser();
-    console.log(this.currentUser);
+    this.userSubscription = this.authService.isCurrentUser.subscribe(
+      (user) => {
+        this.currentUser = user;
+      }
+    );
+    this.authService.emitCredentials();
   }
 
   getMarsuDetails() {
@@ -32,12 +38,6 @@ export class MarsupilamiDetailsComponent implements OnInit {
         (data) => this.marsupilami = data
       )
     );
-  }
-
-  getCurrentUser() {
-    this.authService.isCurrentUser.subscribe((value) => {
-      this.currentUser = value;
-    });
   }
 
   addFriend(marsupilami: any) {

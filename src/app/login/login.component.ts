@@ -40,7 +40,8 @@ export class LoginComponent implements OnInit {
     };
     this.authenticationService.login(this.credentials).subscribe((result) => {
       this.marsupilami = result;
-      this.authenticationService.isCurrentUser.next(this.marsupilami);
+      this.authenticationService.currentUser = this.marsupilami;
+      this.authenticationService.emitCredentials();
       this.route.navigate(['marsupilamis']);
     });
   }

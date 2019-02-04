@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
 import { Router } from '@angular/router';
 import { Marsupilami } from '../marsupilami';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -9,6 +10,8 @@ import { Marsupilami } from '../marsupilami';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  authSubscription: Subscription;
+  userSubscription : Subscription;
   currentUser: Marsupilami;
   isAuth: boolean;
 
@@ -17,20 +20,17 @@ export class HeaderComponent implements OnInit {
     private router: Router) {}
 
   ngOnInit() {
-    this.getLogginStatus();
-    this.getCurrentUser();
-  }
-
-  getLogginStatus() {
-    this.authService.isAuthChange.subscribe((value) => {
-      this.isAuth = value;
-    });
-  }
-
-  getCurrentUser() {
-    this.authService.isCurrentUser.subscribe((value) => {
-      this.currentUser = value;
-    });
+    this.authSubscription = this.authService.isAuthChange.subscribe(
+      (status) => {
+        this.isAuth = status;
+      }
+    )
+    this.userSubscription = this.authService.isCurrentUser.subscribe(
+      (user) => {
+        this.currentUser = user;
+      }
+    )
+    this.authService.emitCredentials();
   }
 
   onLogout() {

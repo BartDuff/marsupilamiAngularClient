@@ -48,7 +48,10 @@ export class MarsupilamiRegistrationComponent implements OnInit {
         login: this.marsupilami.login,
         mdp: this.marsupilami.mdp
       };
-      this.authenticationService.login(credentials).subscribe(() => {
+      this.authenticationService.login(credentials).subscribe((result) => {
+        this.marsupilami = result;
+        this.authenticationService.currentUser = this.marsupilami;
+        this.authenticationService.emitCredentials();
         this.route.navigate(['marsupilamis']);
       });
     });
