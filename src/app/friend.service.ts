@@ -16,7 +16,7 @@ export class FriendService {
     return this.http.get<Marsupilami[]>(`${this.apiFriends}`);
   }
 
-  addFriend(newMarsupilami: any): Observable<any> {
+  addFriend(newMarsupilami: Marsupilami): Observable<any> {
     return this.http.post(`${this.apiFriends}/${newMarsupilami._id}`, newMarsupilami);
   }
 

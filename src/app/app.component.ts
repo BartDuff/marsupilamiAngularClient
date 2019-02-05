@@ -10,5 +10,4 @@ import { AuthenticationService } from './authentication.service';
 export class AppComponent {
   title = 'marsupilamiClient';
   currentUser: Marsupilami;
-  
 }

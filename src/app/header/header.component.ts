@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
   authSubscription: Subscription;
-  userSubscription : Subscription;
+  userSubscription: Subscription;
   currentUser: Marsupilami;
   isAuth: boolean;
 
@@ -24,18 +24,19 @@ export class HeaderComponent implements OnInit {
       (status) => {
         this.isAuth = status;
       }
-    )
+    );
     this.userSubscription = this.authService.isCurrentUser.subscribe(
       (user) => {
         this.currentUser = user;
       }
-    )
+    );
     this.authService.emitCredentials();
   }
 
   onLogout() {
-    this.authService.logout();
-    this.router.navigate(['login']);
-  }
-
+    this.authService.logout().subscribe(
+      () => this.authService.emitCredentials(),
+      (err) => console.log(err),
+      () => this.router.navigate(['/login']));
+    }
 }

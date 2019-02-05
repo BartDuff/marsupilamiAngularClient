@@ -15,11 +15,11 @@ export class AuthenticationService {
   private apiLogin = '/api/login';
   private apiLogout = '/api/logout';
   constructor(private http: HttpClient) {
-    this.isAuth= false;
     this.currentUser = null;
+    this.isAuth = false;
   }
 
-  emitCredentials(){
+  emitCredentials() {
     this.isAuthChange.next(this.isAuth);
     this.isCurrentUser.next(this.currentUser);
   }

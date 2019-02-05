@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MarsupilamiService } from '../marsupilami.service';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../authentication.service';
+import { FriendService } from '../friend.service';
 
 @Component({
   selector: 'app-marsupilami-registration',
@@ -13,14 +14,20 @@ import { AuthenticationService } from '../authentication.service';
 export class MarsupilamiRegistrationComponent implements OnInit {
   marsupilami: Marsupilami;
   marsuForm: FormGroup;
+  currentUser: Marsupilami;
 
   constructor(public marsupilamiService: MarsupilamiService,
     public authenticationService: AuthenticationService,
+    public friendService: FriendService,
     private formBuilder: FormBuilder,
     private route: Router) { }
 
   ngOnInit() {
     this.initializeForm();
+    this.authenticationService.isCurrentUser.subscribe((data) => {
+      this.currentUser = data;
+    });
+    this.authenticationService.emitCredentials();
   }
 
   initializeForm() {
@@ -43,17 +50,24 @@ export class MarsupilamiRegistrationComponent implements OnInit {
     this.marsupilami.race = formValues.race;
     this.marsupilami.nourriture = formValues.nourriture;
     this.marsupilami.friend_ids = [];
-    this.marsupilamiService.addMarsupilami(this.marsupilami).subscribe(() => {
+    this.marsupilamiService.addMarsupilami(this.marsupilami).subscribe((newUser) => {
       const credentials = {
         login: this.marsupilami.login,
         mdp: this.marsupilami.mdp
       };
-      this.authenticationService.login(credentials).subscribe((result) => {
-        this.marsupilami = result;
-        this.authenticationService.currentUser = this.marsupilami;
-        this.authenticationService.emitCredentials();
+      if (this.currentUser) {
+        this.friendService.addFriend(newUser).subscribe(() => {
+          this.authenticationService.emitCredentials();
+        });
         this.route.navigate(['marsupilamis']);
-      });
+      } else {
+        this.authenticationService.login(credentials).subscribe((result) => {
+          this.marsupilami = result;
+          this.authenticationService.currentUser = this.marsupilami;
+          this.authenticationService.emitCredentials();
+          this.route.navigate(['marsupilamis']);
+        });
+      }
     });
   }
 }

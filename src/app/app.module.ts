@@ -14,6 +14,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './header/header.component';
 import { FriendListComponent } from './friend-list/friend-list.component';
+import { FriendService } from './friend.service';
+import { AuthenticationService } from './authentication.service';
+import { AuthGuard } from './auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -28,13 +31,13 @@ import { FriendListComponent } from './friend-list/friend-list.component';
     FriendListComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [ MarsupilamiService ],
+  providers: [ MarsupilamiService, FriendService, AuthenticationService, AuthGuard ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

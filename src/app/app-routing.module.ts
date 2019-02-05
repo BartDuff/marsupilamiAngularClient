@@ -12,11 +12,11 @@ import { FriendListComponent } from './friend-list/friend-list.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'registration', component: MarsupilamiRegistrationComponent },
-  { path: 'edit_marsupilami/:id', component: MarsupilamiEditComponent },
-  { path: 'marsupilamis', component: MarsupilamiListComponent },
-  { path: 'amis', component: FriendListComponent },
-  { path: 'marsupilamis/:id', component: MarsupilamiDetailsComponent },
-  { path: '', redirectTo: 'login', pathMatch: 'full'},
+  { path: 'edit_marsupilami/:id', canActivate: [AuthGuard], component: MarsupilamiEditComponent },
+  { path: 'marsupilamis', canActivate: [AuthGuard], component: MarsupilamiListComponent },
+  { path: 'amis', canActivate: [AuthGuard], component: FriendListComponent },
+  { path: 'marsupilamis/:id', canActivate: [AuthGuard], component: MarsupilamiDetailsComponent },
+  { path: '', redirectTo: 'marsupilamis', pathMatch: 'full'},
   { path: '**', component: NotFoundComponent }
 ];
 

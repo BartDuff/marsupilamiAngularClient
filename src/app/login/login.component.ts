@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.initializeForm();
+    this.authenticationService.emitCredentials();
   }
 
   initializeForm() {
@@ -42,7 +43,7 @@ export class LoginComponent implements OnInit {
       this.marsupilami = result;
       this.authenticationService.currentUser = this.marsupilami;
       this.authenticationService.emitCredentials();
-      this.route.navigate(['marsupilamis']);
+      this.route.navigate(['/marsupilamis']);
     });
   }
 
