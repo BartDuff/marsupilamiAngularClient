@@ -1,5 +1,5 @@
 <div class="center-align">
-  <h2 class="lime lighten-2 z-depth-3">Inscription</h2>
+  <h2 class="grey darken-3 white-text z-depth-3">Inscription</h2>
   <form [formGroup]="marsuForm" (ngSubmit)="editMarsupilami()">
     <div class="form-group">
       <label for="login">Login:</label>
@@ -32,7 +32,7 @@
       <label for="nourriture">Nourriture: </label>
       <input type="text" class="form-control" id="nourriture" formControlName="nourriture">
     </div>
-    <button class="lime lighten-2 btn waves-effect waves-light pulse" type="submit" name="action" [disabled]="!marsuForm.valid">
+    <button class="yellow accent-4 black-text btn waves-effect waves-light pulse" type="submit" name="action" [disabled]="!marsuForm.valid">
       Modifier
     </button>
   </form>

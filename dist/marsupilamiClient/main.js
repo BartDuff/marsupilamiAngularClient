@@ -41,7 +41,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _marsupilami_edit_marsupilami_edit_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./marsupilami-edit/marsupilami-edit.component */ "./src/app/marsupilami-edit/marsupilami-edit.component.ts");
 /* harmony import */ var _marsupilami_registration_marsupilami_registration_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./marsupilami-registration/marsupilami-registration.component */ "./src/app/marsupilami-registration/marsupilami-registration.component.ts");
 /* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./login/login.component */ "./src/app/login/login.component.ts");
-/* harmony import */ var _friend_list_friend_list_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./friend-list/friend-list.component */ "./src/app/friend-list/friend-list.component.ts");
+/* harmony import */ var _auth_guard_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./auth-guard.service */ "./src/app/auth-guard.service.ts");
+/* harmony import */ var _friend_list_friend_list_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./friend-list/friend-list.component */ "./src/app/friend-list/friend-list.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -57,14 +58,15 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var routes = [
     { path: 'login', component: _login_login_component__WEBPACK_IMPORTED_MODULE_7__["LoginComponent"] },
     { path: 'registration', component: _marsupilami_registration_marsupilami_registration_component__WEBPACK_IMPORTED_MODULE_6__["MarsupilamiRegistrationComponent"] },
-    { path: 'edit_marsupilami/:id', component: _marsupilami_edit_marsupilami_edit_component__WEBPACK_IMPORTED_MODULE_5__["MarsupilamiEditComponent"] },
-    { path: 'marsupilamis', component: _marsupilami_list_marsupilami_list_component__WEBPACK_IMPORTED_MODULE_4__["MarsupilamiListComponent"] },
-    { path: 'amis', component: _friend_list_friend_list_component__WEBPACK_IMPORTED_MODULE_8__["FriendListComponent"] },
-    { path: 'marsupilamis/:id', component: _marsupilami_details_marsupilami_details_component__WEBPACK_IMPORTED_MODULE_3__["MarsupilamiDetailsComponent"] },
-    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: 'edit_marsupilami/:id', canActivate: [_auth_guard_service__WEBPACK_IMPORTED_MODULE_8__["AuthGuard"]], component: _marsupilami_edit_marsupilami_edit_component__WEBPACK_IMPORTED_MODULE_5__["MarsupilamiEditComponent"] },
+    { path: 'marsupilamis', canActivate: [_auth_guard_service__WEBPACK_IMPORTED_MODULE_8__["AuthGuard"]], component: _marsupilami_list_marsupilami_list_component__WEBPACK_IMPORTED_MODULE_4__["MarsupilamiListComponent"] },
+    { path: 'amis', canActivate: [_auth_guard_service__WEBPACK_IMPORTED_MODULE_8__["AuthGuard"]], component: _friend_list_friend_list_component__WEBPACK_IMPORTED_MODULE_9__["FriendListComponent"] },
+    { path: 'marsupilamis/:id', canActivate: [_auth_guard_service__WEBPACK_IMPORTED_MODULE_8__["AuthGuard"]], component: _marsupilami_details_marsupilami_details_component__WEBPACK_IMPORTED_MODULE_3__["MarsupilamiDetailsComponent"] },
+    { path: '', redirectTo: 'marsupilamis', pathMatch: 'full' },
     { path: '**', component: _not_found_not_found_component__WEBPACK_IMPORTED_MODULE_2__["NotFoundComponent"] }
 ];
 var AppRoutingModule = /** @class */ (function () {
@@ -101,7 +103,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav>\n  <div class=\"nav-wrapper lime lighten-2\">\n    <app-header></app-header>\n  </div>\n</nav>\n<router-outlet></router-outlet>\n"
+module.exports = "<nav>\r\n  <div class=\"nav-wrapper grey darken-4\">\r\n    <app-header></app-header>\r\n  </div>\r\n</nav>\r\n<div class=\"container\">\r\n  <router-outlet></router-outlet>\r\n</div>"
 
 /***/ }),
 
@@ -166,12 +168,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
 /* harmony import */ var _header_header_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./header/header.component */ "./src/app/header/header.component.ts");
 /* harmony import */ var _friend_list_friend_list_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./friend-list/friend-list.component */ "./src/app/friend-list/friend-list.component.ts");
+/* harmony import */ var _friend_service__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./friend.service */ "./src/app/friend.service.ts");
+/* harmony import */ var _authentication_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./authentication.service */ "./src/app/authentication.service.ts");
+/* harmony import */ var _auth_guard_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./auth-guard.service */ "./src/app/auth-guard.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
+
 
 
 
@@ -204,17 +212,67 @@ var AppModule = /** @class */ (function () {
                 _friend_list_friend_list_component__WEBPACK_IMPORTED_MODULE_14__["FriendListComponent"]
             ],
             imports: [
-                _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_12__["AppRoutingModule"],
+                _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"]
             ],
-            providers: [_marsupilami_service__WEBPACK_IMPORTED_MODULE_5__["MarsupilamiService"]],
+            providers: [_marsupilami_service__WEBPACK_IMPORTED_MODULE_5__["MarsupilamiService"], _friend_service__WEBPACK_IMPORTED_MODULE_15__["FriendService"], _authentication_service__WEBPACK_IMPORTED_MODULE_16__["AuthenticationService"], _auth_guard_service__WEBPACK_IMPORTED_MODULE_17__["AuthGuard"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
         })
     ], AppModule);
     return AppModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/auth-guard.service.ts":
+/*!***************************************!*\
+  !*** ./src/app/auth-guard.service.ts ***!
+  \***************************************/
+/*! exports provided: AuthGuard */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthGuard", function() { return AuthGuard; });
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _authentication_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./authentication.service */ "./src/app/authentication.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var AuthGuard = /** @class */ (function () {
+    function AuthGuard(authService, router) {
+        this.authService = authService;
+        this.router = router;
+    }
+    AuthGuard.prototype.canActivate = function () {
+        this.authService.emitCredentials();
+        if (this.authService.isAuth) {
+            return true;
+        }
+        this.router.navigate(['/login']);
+        return false;
+    };
+    AuthGuard = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        __metadata("design:paramtypes", [_authentication_service__WEBPACK_IMPORTED_MODULE_2__["AuthenticationService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_0__["Router"]])
+    ], AuthGuard);
+    return AuthGuard;
 }());
 
 
@@ -248,28 +306,27 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 var AuthenticationService = /** @class */ (function () {
     function AuthenticationService(http) {
-        var _this = this;
         this.http = http;
         this.isAuthChange = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
         this.isCurrentUser = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
         this.apiLogin = '/api/login';
         this.apiLogout = '/api/logout';
-        this.isAuthChange.subscribe(function (value) {
-            _this.isAuth = value;
-        });
-        this.isCurrentUser.subscribe(function (value) {
-            _this.currentUser = value;
-        });
+        this.currentUser = null;
+        this.isAuth = false;
     }
+    AuthenticationService.prototype.emitCredentials = function () {
+        this.isAuthChange.next(this.isAuth);
+        this.isCurrentUser.next(this.currentUser);
+    };
     AuthenticationService.prototype.login = function (body) {
         this.isAuth = true;
-        this.isAuthChange.next(this.isAuth);
+        this.emitCredentials();
         return this.http.post("" + this.apiLogin, body);
     };
     AuthenticationService.prototype.logout = function () {
         this.isAuth = false;
-        this.isAuthChange.next(this.isAuth);
-        this.isCurrentUser.next(null);
+        this.currentUser = null;
+        this.emitCredentials();
         return this.http.get("" + this.apiLogout);
     };
     AuthenticationService = __decorate([
@@ -303,7 +360,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ul class=\"collection\" *ngFor=\"let m of friends | async\">\n  <li class=\"collection-item avatar\">\n    <span class=\"title\">Nom: {{ m.login }}</span>\n    <p>Famille: {{ m.famille }}<br>\n      Race: {{ m.race }}<br>\n      Nourriture: {{ m.nourriture }}<br>\n    </p>\n    <a [routerLink]=\"['/marsupilamis/', m._id]\" class=\"btn-floating btn-large waves-effect waves-light lime lighten-2\">Voir</a>\n  </li>\n</ul>"
+module.exports = "<ul class=\"collection\" *ngFor=\"let m of friends | async\">\r\n  <li class=\"collection-item avatar\">\r\n    <span class=\"title\">Nom: {{ m.login }}</span>\r\n    <p>Famille: {{ m.famille }}<br>\r\n      Race: {{ m.race }}<br>\r\n      Nourriture: {{ m.nourriture }}<br>\r\n    </p>\r\n    <a [routerLink]=\"['/marsupilamis/', m._id]\" class=\"btn-floating btn-large waves-effect waves-light yellow accent-4 black-text\">Voir</a>\r\n  </li>\r\n</ul>"
 
 /***/ }),
 
@@ -412,7 +469,7 @@ var FriendService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".logo {\n    height: 50px;\n    width: 50px;\n}"
+module.exports = ".logo {\r\n    height: 50px;\r\n    width: 50px;\r\n}"
 
 /***/ }),
 
@@ -423,7 +480,7 @@ module.exports = ".logo {\n    height: 50px;\n    width: 50px;\n}"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<a ref=\"#!\" class=\"brand-logo left\"><img class=\"logo \"src=\"../../assets/images/marsupilami.png\"/></a>\n<a href=\"#!\" class=\"brand-logo center\">MarsupilAmi</a>\n<ul class=\"right hide-on-med-and-down\">\n  <li><a routerLink=\"/login\" *ngIf=\"!isAuth\">Login</a></li>\n  <li><a (click)=\"onLogout()\" *ngIf=\"isAuth\">Logout</a></li>\n  <li><a routerLink=\"/registration\" *ngIf=\"!isAuth\">Inscription</a></li>\n  <li><a routerLink=\"/marsupilamis/{{ currentUser._id }}\" *ngIf=\"isAuth\">{{currentUser.login}}</a></li>\n  <li><a routerLink=\"/edit_marsupilami/{{ currentUser._id }}\" *ngIf=\"isAuth\">Editer</a></li>\n  <li><a routerLink=\"/amis\" *ngIf=\"isAuth\">Amis</a></li>\n  <li><a routerLink=\"/marsupilamis\" *ngIf=\"isAuth\">Marsupilamis</a></li>\n</ul>"
+module.exports = "<a ref=\"#!\" class=\"brand-logo left\"><img class=\"logo \"src=\"../../assets/images/marsupilami.png\"/></a>\r\n<a href=\"#!\" class=\"brand-logo center\">MarsupilAmi</a>\r\n<ul class=\"right hide-on-med-and-down\">\r\n  <li><a routerLink=\"/login\" *ngIf=\"!isAuth\">Login</a></li>\r\n  <li><a (click)=\"onLogout()\" *ngIf=\"isAuth\">Logout</a></li>\r\n  <li><a routerLink=\"/registration\" *ngIf=\"!isAuth\">Inscription</a></li>\r\n  <li><a routerLink=\"/registration\" *ngIf=\"isAuth\">Inscrire ami</a></li>\r\n  <li><a routerLink=\"/marsupilamis/{{ currentUser._id }}\" *ngIf=\"isAuth\">{{currentUser.login}}</a></li>\r\n  <li><a routerLink=\"/edit_marsupilami/{{ currentUser._id }}\" *ngIf=\"isAuth\">Editer</a></li>\r\n  <li><a routerLink=\"/amis\" *ngIf=\"isAuth\">Amis</a></li>\r\n  <li><a routerLink=\"/marsupilamis\" *ngIf=\"isAuth\">Marsupilamis</a></li>\r\n</ul>"
 
 /***/ }),
 
@@ -458,24 +515,18 @@ var HeaderComponent = /** @class */ (function () {
         this.router = router;
     }
     HeaderComponent.prototype.ngOnInit = function () {
-        this.getLogginStatus();
-        this.getCurrentUser();
-    };
-    HeaderComponent.prototype.getLogginStatus = function () {
         var _this = this;
-        this.authService.isAuthChange.subscribe(function (value) {
-            _this.isAuth = value;
+        this.authSubscription = this.authService.isAuthChange.subscribe(function (status) {
+            _this.isAuth = status;
         });
-    };
-    HeaderComponent.prototype.getCurrentUser = function () {
-        var _this = this;
-        this.authService.isCurrentUser.subscribe(function (value) {
-            _this.currentUser = value;
+        this.userSubscription = this.authService.isCurrentUser.subscribe(function (user) {
+            _this.currentUser = user;
         });
+        this.authService.emitCredentials();
     };
     HeaderComponent.prototype.onLogout = function () {
-        this.authService.logout();
-        this.router.navigate(['login']);
+        var _this = this;
+        this.authService.logout().subscribe(function () { return _this.authService.emitCredentials(); }, function (err) { return console.log(err); }, function () { return _this.router.navigate(['/login']); });
     };
     HeaderComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -500,7 +551,7 @@ var HeaderComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".row {\r\n    margin-top: 10%;\r\n}\r\n\r\nh4 {\r\n    padding: 10px;\r\n}"
 
 /***/ }),
 
@@ -511,7 +562,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"center-align\">\n  <h2 class=\"lime lighten-2 z-depth-3\">Connexion: </h2>\n  <form [formGroup]=\"marsuForm\" (ngSubmit)=\"login()\">\n    <div class=\"form-group\">\n      <label for=\"login\">Login:</label>\n      <input type=\"text\" class=\"form-control\" [ngClass]=\"{ 'invalid': !marsuForm.controls.login.valid && marsuForm.controls.login.dirty }\"\n        id=\"login\" formControlName=\"login\">\n      <div *ngIf=\"!marsuForm.controls.login.valid && marsu.controls.login.dirty\">\n        Utilisateur inconnu\n      </div>\n    </div>\n    <div class=\"form-group\">\n      <label for=\"mdp\">Mot de passe: </label>\n      <input type=\"password\" class=\"form-control\" id=\"mdp\" formControlName=\"mdp\" [ngClass]=\"{ 'invalid': !marsuForm.controls.mdp.valid && marsuForm.controls.mdp.dirty }\">\n    </div>\n    <button class=\"btn waves-effect waves-light pulse lime darken-2\" type=\"submit\" name=\"action\" [disabled]=\"!marsuForm.valid\">\n      Login\n    </button>\n  </form>\n</div>"
+module.exports = "<div class=\"row\">\r\n  <div class=\"col s4 offset-s4\">\r\n    <div class=\"center-align\">\r\n      <h4 class=\"grey darken-3 white-text z-depth-3\">Connexion: </h4>\r\n      <form [formGroup]=\"marsuForm\" (ngSubmit)=\"login()\">\r\n        <div class=\"form-group\">\r\n          <label for=\"login\">Login:</label>\r\n          <input type=\"text\" class=\"form-control\" [ngClass]=\"{ 'invalid': !marsuForm.controls.login.valid && marsuForm.controls.login.dirty }\"\r\n            id=\"login\" formControlName=\"login\">\r\n          <div *ngIf=\"!marsuForm.controls.login.valid && marsu.controls.login.dirty\">\r\n            Utilisateur inconnu\r\n          </div>\r\n        </div>\r\n        <div class=\"form-group\">\r\n          <label for=\"mdp\">Mot de passe: </label>\r\n          <input type=\"password\" class=\"form-control\" id=\"mdp\" formControlName=\"mdp\" [ngClass]=\"{ 'invalid': !marsuForm.controls.mdp.valid && marsuForm.controls.mdp.dirty }\">\r\n        </div>\r\n        <button class=\"btn waves-effect waves-light pulse yellow accent-4 black-text\" type=\"submit\" name=\"action\" [disabled]=\"!marsuForm.valid\">\r\n          Login\r\n        </button>\r\n      </form>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -553,6 +604,7 @@ var LoginComponent = /** @class */ (function () {
     }
     LoginComponent.prototype.ngOnInit = function () {
         this.initializeForm();
+        this.authenticationService.emitCredentials();
     };
     LoginComponent.prototype.initializeForm = function () {
         this.marsuForm = this.formBuilder.group({
@@ -569,8 +621,9 @@ var LoginComponent = /** @class */ (function () {
         };
         this.authenticationService.login(this.credentials).subscribe(function (result) {
             _this.marsupilami = result;
-            _this.authenticationService.isCurrentUser.next(_this.marsupilami);
-            _this.route.navigate(['marsupilamis']);
+            _this.authenticationService.currentUser = _this.marsupilami;
+            _this.authenticationService.emitCredentials();
+            _this.route.navigate(['/marsupilamis']);
         });
     };
     LoginComponent = __decorate([
@@ -609,7 +662,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p *ngIf=\"!marsupilami\">Chargement en cours...</p>\n<div class=\"card big\" *ngIf=\"marsupilami\">\n  <div class=\"card-content\">\n    <h4 class=\"lime lighten-2\">Détails sur le Marsupilami:</h4>\n    <span class=\"card-title\">Nom: {{ marsupilami.login }}</span>\n    <p>Famille: {{ marsupilami.famille }}</p>\n    <p>Race: {{ marsupilami.race}}</p>\n    <p>Nourriture: {{ marsupilami.nourriture}}</p>\n    <div class=\"card-action\">\n      <a routerLink=\"/marsupilamis\" class=\"btn btn-lg btn-primary center-align\">\n        Retour\n      </a>\n      <button (click)=\"addFriend(marsupilami)\" class=\"btn btn-lg btn-primary center-align\">\n        Ajouter\n      </button>\n      <button (click)=\"deleteFriend(marsupilami)\" class=\"btn btn-lg btn-primary center-align\">\n        Supprimer\n        </button>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<p *ngIf=\"!marsupilami\">Chargement en cours...</p>\r\n<div class=\"card big\" *ngIf=\"marsupilami\">\r\n  <div class=\"card-content\">\r\n    <h4 class=\"grey darken-3 white-text\">Détails sur le Marsupilami:</h4>\r\n    <span class=\"card-title\">Nom: {{ marsupilami.login }}</span>\r\n    <p>Famille: {{ marsupilami.famille }}</p>\r\n    <p>Race: {{ marsupilami.race}}</p>\r\n    <p>Nourriture: {{ marsupilami.nourriture}}</p>\r\n    <div class=\"card-action\">\r\n      <a routerLink=\"/marsupilamis\" class=\"btn yellow accent-4 black-text btn-lg btn-primary center-align\">\r\n        Retour\r\n      </a>\r\n      <button (click)=\"addFriend(marsupilami)\" *ngIf=\"friendable\" class=\"btn yellow accent-4 black-text btn-lg btn-primary center-align\">\r\n        Ajouter\r\n      </button>\r\n      <button (click)=\"deleteFriend(marsupilami)\" *ngIf=\"unfriendable\" class=\"btn yellow accent-4 black-text btn-lg btn-primary center-align\">\r\n        Supprimer\r\n        </button>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -651,19 +704,31 @@ var MarsupilamiDetailsComponent = /** @class */ (function () {
         this.friendService = friendService;
     }
     MarsupilamiDetailsComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.userSubscription = this.authService.isCurrentUser.subscribe(function (user) {
+            _this.currentUser = user;
+        });
         this.getMarsuDetails();
-        this.getCurrentUser();
-        console.log(this.currentUser);
+        this.authService.emitCredentials();
     };
     MarsupilamiDetailsComponent.prototype.getMarsuDetails = function () {
         var _this = this;
-        this.route.params.subscribe(function (params) { return _this.marsupilamiService.getMarsupilami(params['id']).subscribe(function (data) { return _this.marsupilami = data; }); });
-    };
-    MarsupilamiDetailsComponent.prototype.getCurrentUser = function () {
-        var _this = this;
-        this.authService.isCurrentUser.subscribe(function (value) {
-            _this.currentUser = value;
-        });
+        this.route.params.subscribe(function (params) { return _this.marsupilamiService.getMarsupilami(params['id']).subscribe(function (data) {
+            _this.marsupilami = data;
+            if (_this.marsupilami._id === _this.currentUser._id || _this.currentUser.friend_ids.includes(_this.marsupilami._id)) {
+                _this.friendable = false;
+                if (_this.marsupilami._id !== _this.currentUser._id) {
+                    _this.unfriendable = true;
+                }
+                else {
+                    _this.unfriendable = false;
+                }
+            }
+            else {
+                _this.friendable = true;
+                _this.unfriendable = false;
+            }
+        }); });
     };
     MarsupilamiDetailsComponent.prototype.addFriend = function (marsupilami) {
         var _this = this;
@@ -712,7 +777,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"center-align\">\n  <h2 class=\"teal z-depth-3\">Inscription</h2>\n  <form [formGroup]=\"marsuForm\" (ngSubmit)=\"editMarsupilami()\">\n    <div class=\"form-group\">\n      <label for=\"login\">Login:</label>\n      <input type=\"text\" class=\"form-control\" [ngClass]=\"{ 'invalid': !marsuForm.controls.login.valid && marsuForm.controls.login.dirty }\"\n        id=\"login\" formControlName=\"login\">\n      <div *ngIf=\"!marsuForm.controls.login.valid && marsuForm.controls.login.dirty\">\n        Le nom du Marsupilami est obligatoire!\n      </div>\n    </div>\n    <div class=\"form-group\">\n      <label for=\"mdp\">Mot de passe: </label>\n      <input type=\"password\" class=\"form-control\" id=\"mdp\" formControlName=\"mdp\" [ngClass]=\"{ 'invalid': !marsuForm.controls.mdp.valid && marsuForm.controls.mdp.dirty }\">\n    </div>\n    <div *ngIf=\"!marsuForm.controls.mdp.valid && marsuForm.controls.mdp.dirty\">\n      Le mot de passe est obligatoire!\n    </div>\n    <div class=\"form-group\">\n      <label for=\"date_naissance\">Date de Naissance:</label>\n      <input type=\"text\" class=\"form-control\" id=\"date_naissance\" formControlName=\"date_naissance\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"famille\">Famille: </label>\n      <input type=\"text\" class=\"form-control\" id=\"famille\" formControlName=\"famille\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"race\">Race :</label>\n      <input type=\"text\" class=\"form-control\" id=\"race\" formControlName=\"race\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"nourriture\">Nourriture: </label>\n      <input type=\"text\" class=\"form-control\" id=\"nourriture\" formControlName=\"nourriture\">\n    </div>\n    <button class=\"btn waves-effect waves-light pulse\" type=\"submit\" name=\"action\" [disabled]=\"!marsuForm.valid\">\n      Modifier\n    </button>\n  </form>\n</div>\n"
+module.exports = "<div class=\"center-align\">\r\n  <h2 class=\"grey darken-3 white-text z-depth-3\">Inscription</h2>\r\n  <form [formGroup]=\"marsuForm\" (ngSubmit)=\"editMarsupilami()\">\r\n    <div class=\"form-group\">\r\n      <label for=\"login\">Login:</label>\r\n      <input type=\"text\" class=\"form-control\" [ngClass]=\"{ 'invalid': !marsuForm.controls.login.valid && marsuForm.controls.login.dirty }\"\r\n        id=\"login\" formControlName=\"login\">\r\n      <div *ngIf=\"!marsuForm.controls.login.valid && marsuForm.controls.login.dirty\">\r\n        Le nom du Marsupilami est obligatoire!\r\n      </div>\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label for=\"mdp\">Mot de passe: </label>\r\n      <input type=\"password\" class=\"form-control\" id=\"mdp\" formControlName=\"mdp\" [ngClass]=\"{ 'invalid': !marsuForm.controls.mdp.valid && marsuForm.controls.mdp.dirty }\">\r\n    </div>\r\n    <div *ngIf=\"!marsuForm.controls.mdp.valid && marsuForm.controls.mdp.dirty\">\r\n      Le mot de passe est obligatoire!\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label for=\"date_naissance\">Date de Naissance:</label>\r\n      <input type=\"text\" class=\"form-control\" id=\"date_naissance\" formControlName=\"date_naissance\">\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label for=\"famille\">Famille: </label>\r\n      <input type=\"text\" class=\"form-control\" id=\"famille\" formControlName=\"famille\">\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label for=\"race\">Race :</label>\r\n      <input type=\"text\" class=\"form-control\" id=\"race\" formControlName=\"race\">\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label for=\"nourriture\">Nourriture: </label>\r\n      <input type=\"text\" class=\"form-control\" id=\"nourriture\" formControlName=\"nourriture\">\r\n    </div>\r\n    <button class=\"yellow accent-4 black-text btn waves-effect waves-light pulse\" type=\"submit\" name=\"action\" [disabled]=\"!marsuForm.valid\">\r\n      Modifier\r\n    </button>\r\n  </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -829,7 +894,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ul class=\"collection\" *ngFor=\"let m of marsupilamis | async\">\n  <li class=\"collection-item avatar\">\n    <span class=\"title\">Nom: {{ m.login }}</span>\n    <p>Famille: {{ m.famille }}<br>\n      Race: {{ m.race }}<br>\n      Nourriture: {{ m.nourriture }}<br>\n    </p>\n    <a [routerLink]=\"['/marsupilamis/', m._id]\" class=\"btn-floating btn-large waves-effect waves-light lime lighten-2\">Voir</a>\n  </li>\n</ul>"
+module.exports = "<ul class=\"collection\" *ngFor=\"let m of marsupilamis | async\">\r\n  <li class=\"collection-item avatar\">\r\n    <span class=\"title\">Nom: {{ m.login }}</span>\r\n    <p>Famille: {{ m.famille }}<br>\r\n      Race: {{ m.race }}<br>\r\n      Nourriture: {{ m.nourriture }}<br>\r\n    </p>\r\n    <a [routerLink]=\"['/marsupilamis/', m._id]\" class=\"btn-floating btn-large waves-effect waves-light yellow accent-4 black-text\">Voir</a>\r\n  </li>\r\n</ul>"
 
 /***/ }),
 
@@ -888,7 +953,7 @@ var MarsupilamiListComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".row {\r\n    margin-top: 10%;\r\n}\r\n\r\nh4 {\r\n    padding: 10px;\r\n}\r\n\r\nbutton:disabled {\r\n    background-color: #fff9c4;\r\n}"
 
 /***/ }),
 
@@ -899,7 +964,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"center-align\">\n  <h2 class=\"lime lighten-2 z-depth-3\">Inscription</h2>\n  <form [formGroup]=\"marsuForm\" (ngSubmit)=\"addMarsupilami()\">\n    <div class=\"form-group\">\n      <label for=\"login\">Login:</label>\n      <input type=\"text\" class=\"form-control\" [ngClass]=\"{ 'invalid': !marsuForm.controls.login.valid && marsuForm.controls.login.dirty }\"\n        id=\"login\" formControlName=\"login\">\n      <div *ngIf=\"!marsuForm.controls.login.valid && marsuForm.controls.login.dirty\">\n        Le nom du Marsupilami est obligatoire!\n      </div>\n    </div>\n    <div class=\"form-group\">\n      <label for=\"mdp\">Mot de passe: </label>\n      <input type=\"password\" class=\"form-control\" id=\"mdp\" formControlName=\"mdp\" [ngClass]=\"{ 'invalid': !marsuForm.controls.mdp.valid && marsuForm.controls.mdp.dirty }\">\n    </div>\n    <div *ngIf=\"!marsuForm.controls.mdp.valid && marsuForm.controls.mdp.dirty\">\n      Le mot de passe est obligatoire!\n    </div>\n    <div class=\"form-group\">\n      <label for=\"date_naissance\">Date de Naissance:</label>\n      <input type=\"text\" class=\"form-control\" id=\"date_naissance\" formControlName=\"date_naissance\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"famille\">Famille: </label>\n      <input type=\"text\" class=\"form-control\" id=\"famille\" formControlName=\"famille\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"race\">Race :</label>\n      <input type=\"text\" class=\"form-control\" id=\"race\" formControlName=\"race\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"nourriture\">Nourriture: </label>\n      <input type=\"text\" class=\"form-control\" id=\"nourriture\" formControlName=\"nourriture\">\n    </div>\n    <button class=\"btn waves-effect waves-light pulse\" type=\"submit\" name=\"action\" [disabled]=\"!marsuForm.valid\">\n      Inscription\n    </button>\n  </form>\n</div>"
+module.exports = "<div class=\"row\">\r\n  <div class=\"col s4 offset-s4\">\r\n    <div class=\"center-align\">\r\n      <h4 class=\"grey darken-3 white-text z-depth-3\">Inscription</h4>\r\n      <form [formGroup]=\"marsuForm\" (ngSubmit)=\"addMarsupilami()\">\r\n        <div class=\"form-group\">\r\n          <label for=\"login\">Login:</label>\r\n          <input type=\"text\" class=\"form-control\" [ngClass]=\"{ 'invalid': !marsuForm.controls.login.valid && marsuForm.controls.login.dirty }\"\r\n            id=\"login\" formControlName=\"login\">\r\n          <div *ngIf=\"!marsuForm.controls.login.valid && marsuForm.controls.login.dirty\">\r\n            Le nom du Marsupilami est obligatoire!\r\n          </div>\r\n        </div>\r\n        <div class=\"form-group\">\r\n          <label for=\"mdp\">Mot de passe: </label>\r\n          <input type=\"password\" class=\"form-control\" id=\"mdp\" formControlName=\"mdp\" [ngClass]=\"{ 'invalid': !marsuForm.controls.mdp.valid && marsuForm.controls.mdp.dirty }\">\r\n        </div>\r\n        <div *ngIf=\"!marsuForm.controls.mdp.valid && marsuForm.controls.mdp.dirty\">\r\n          Le mot de passe est obligatoire!\r\n        </div>\r\n        <div class=\"form-group\">\r\n          <label for=\"date_naissance\">Date de Naissance:</label>\r\n          <input type=\"text\" class=\"form-control\" id=\"date_naissance\" formControlName=\"date_naissance\">\r\n        </div>\r\n        <div class=\"form-group\">\r\n          <label for=\"famille\">Famille: </label>\r\n          <input type=\"text\" class=\"form-control\" id=\"famille\" formControlName=\"famille\">\r\n        </div>\r\n        <div class=\"form-group\">\r\n          <label for=\"race\">Race :</label>\r\n          <input type=\"text\" class=\"form-control\" id=\"race\" formControlName=\"race\">\r\n        </div>\r\n        <div class=\"form-group\">\r\n          <label for=\"nourriture\">Nourriture: </label>\r\n          <input type=\"text\" class=\"form-control\" id=\"nourriture\" formControlName=\"nourriture\">\r\n        </div>\r\n        <button class=\"btn waves-effect waves-light pulse yellow accent-4 black-text\" type=\"submit\" name=\"action\"\r\n          [disabled]=\"!marsuForm.valid\">\r\n          Inscription\r\n        </button>\r\n      </form>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -919,6 +984,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _marsupilami_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../marsupilami.service */ "./src/app/marsupilami.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _authentication_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../authentication.service */ "./src/app/authentication.service.ts");
+/* harmony import */ var _friend_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../friend.service */ "./src/app/friend.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -934,15 +1000,22 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var MarsupilamiRegistrationComponent = /** @class */ (function () {
-    function MarsupilamiRegistrationComponent(marsupilamiService, authenticationService, formBuilder, route) {
+    function MarsupilamiRegistrationComponent(marsupilamiService, authenticationService, friendService, formBuilder, route) {
         this.marsupilamiService = marsupilamiService;
         this.authenticationService = authenticationService;
+        this.friendService = friendService;
         this.formBuilder = formBuilder;
         this.route = route;
     }
     MarsupilamiRegistrationComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.initializeForm();
+        this.authenticationService.isCurrentUser.subscribe(function (data) {
+            _this.currentUser = data;
+        });
+        this.authenticationService.emitCredentials();
     };
     MarsupilamiRegistrationComponent.prototype.initializeForm = function () {
         this.marsuForm = this.formBuilder.group({
@@ -965,14 +1038,25 @@ var MarsupilamiRegistrationComponent = /** @class */ (function () {
         this.marsupilami.race = formValues.race;
         this.marsupilami.nourriture = formValues.nourriture;
         this.marsupilami.friend_ids = [];
-        this.marsupilamiService.addMarsupilami(this.marsupilami).subscribe(function () {
+        this.marsupilamiService.addMarsupilami(this.marsupilami).subscribe(function (newUser) {
             var credentials = {
                 login: _this.marsupilami.login,
                 mdp: _this.marsupilami.mdp
             };
-            _this.authenticationService.login(credentials).subscribe(function () {
+            if (_this.currentUser) {
+                _this.friendService.addFriend(newUser).subscribe(function () {
+                    _this.authenticationService.emitCredentials();
+                });
                 _this.route.navigate(['marsupilamis']);
-            });
+            }
+            else {
+                _this.authenticationService.login(credentials).subscribe(function (result) {
+                    _this.marsupilami = result;
+                    _this.authenticationService.currentUser = _this.marsupilami;
+                    _this.authenticationService.emitCredentials();
+                    _this.route.navigate(['marsupilamis']);
+                });
+            }
         });
     };
     MarsupilamiRegistrationComponent = __decorate([
@@ -983,6 +1067,7 @@ var MarsupilamiRegistrationComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_marsupilami_service__WEBPACK_IMPORTED_MODULE_3__["MarsupilamiService"],
             _authentication_service__WEBPACK_IMPORTED_MODULE_5__["AuthenticationService"],
+            _friend_service__WEBPACK_IMPORTED_MODULE_6__["FriendService"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"],
             _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
     ], MarsupilamiRegistrationComponent);
@@ -1088,7 +1173,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1 class=\"red\">\n  Erreur 404: Impossible de trouver la page!\n</h1>\n<p>Redirection dans {{ seconds }} seconde<span *ngIf=\"seconds > 1\">s</span>... </p>"
+module.exports = "<h1 class=\"red\">\r\n  Erreur 404: Impossible de trouver la page!\r\n</h1>\r\n<p>Redirection dans {{ seconds }} seconde<span *ngIf=\"seconds > 1\">s</span>... </p>"
 
 /***/ }),
 
@@ -1210,7 +1295,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/flo/Desktop/AngularMarsupi/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\stagiaire\Desktop\Nouveau dossier\marsupilamiAngularClient\src\main.ts */"./src/main.ts");
 
 
 /***/ })

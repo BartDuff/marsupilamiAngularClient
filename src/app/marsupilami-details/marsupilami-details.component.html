@@ -1,19 +1,19 @@
 <p *ngIf="!marsupilami">Chargement en cours...</p>
 <div class="card big" *ngIf="marsupilami">
   <div class="card-content">
-    <h4 class="lime lighten-2">Détails sur le Marsupilami:</h4>
+    <h4 class="grey darken-3 white-text">Détails sur le Marsupilami:</h4>
     <span class="card-title">Nom: {{ marsupilami.login }}</span>
     <p>Famille: {{ marsupilami.famille }}</p>
     <p>Race: {{ marsupilami.race}}</p>
     <p>Nourriture: {{ marsupilami.nourriture}}</p>
     <div class="card-action">
-      <a routerLink="/marsupilamis" class="btn lime lighten-2 btn-lg btn-primary center-align">
+      <a routerLink="/marsupilamis" class="btn yellow accent-4 black-text btn-lg btn-primary center-align">
         Retour
       </a>
-      <button (click)="addFriend(marsupilami)" *ngIf="friendable" class="btn lime lighten-2 btn-lg btn-primary center-align">
+      <button (click)="addFriend(marsupilami)" *ngIf="friendable" class="btn yellow accent-4 black-text btn-lg btn-primary center-align">
         Ajouter
       </button>
-      <button (click)="deleteFriend(marsupilami)" *ngIf="unfriendable" class="btn lime lighten-2 btn-lg btn-primary center-align">
+      <button (click)="deleteFriend(marsupilami)" *ngIf="unfriendable" class="btn yellow accent-4 black-text btn-lg btn-primary center-align">
         Supprimer
         </button>
     </div>
