@@ -58,6 +58,7 @@ export class MarsupilamiDetailsComponent implements OnInit {
     this.friendService.addFriend(marsupilami).subscribe(
       (data) => this.marsupilami = data
     );
+    this.authService.emitCredentials();
     this.router.navigate(['amis']);
   }
 
@@ -65,6 +66,7 @@ export class MarsupilamiDetailsComponent implements OnInit {
     this.friendService.deleteFriend(marsupilami).subscribe(
       (data) => this.marsupilami = data
     );
+    this.authService.emitCredentials();
     this.router.navigate(['amis']);
   }
 }

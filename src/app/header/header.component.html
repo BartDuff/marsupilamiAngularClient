@@ -9,4 +9,5 @@
   <li><a routerLink="/edit_marsupilami/{{ currentUser._id }}" *ngIf="isAuth">Editer</a></li>
   <li><a routerLink="/amis" *ngIf="isAuth">Amis</a></li>
   <li><a routerLink="/marsupilamis" *ngIf="isAuth">Marsupilamis</a></li>
+  <li><a routerLink="/admin" *ngIf="isAuth&&currentUser.isAdmin">Admin panel</a></li>
 </ul>

@@ -7,8 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class MarsupilamiService {
-
-  private marsupilamis: Marsupilami[];
+  // private marsupilamis: Marsupilami[];
   private apiUrl = '/api/marsupilamis';
   constructor(private http: HttpClient) { }
 

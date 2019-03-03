@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
   userSubscription: Subscription;
   currentUser: Marsupilami;
   isAuth: boolean;
+  isAdmin: boolean;
 
 
   constructor(private authService: AuthenticationService,
@@ -23,11 +24,20 @@ export class HeaderComponent implements OnInit {
     this.authSubscription = this.authService.isAuthChange.subscribe(
       (status) => {
         this.isAuth = status;
+
       }
     );
+    this.authSubscription = this.authService.isAdminChange.subscribe(
+      (status) => {
+        this.isAdmin = status; }
+    );
+
     this.userSubscription = this.authService.isCurrentUser.subscribe(
       (user) => {
         this.currentUser = user;
+        if (this.currentUser && this.currentUser.isAdmin) {
+          this.isAdmin = true;
+        }
       }
     );
     this.authService.emitCredentials();

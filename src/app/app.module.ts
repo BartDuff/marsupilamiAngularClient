@@ -17,6 +17,7 @@ import { FriendListComponent } from './friend-list/friend-list.component';
 import { FriendService } from './friend.service';
 import { AuthenticationService } from './authentication.service';
 import { AuthGuard } from './auth-guard.service';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AuthGuard } from './auth-guard.service';
     LoginComponent,
     NotFoundComponent,
     HeaderComponent,
-    FriendListComponent
+    FriendListComponent,
+    AdminComponent
   ],
   imports: [
     AppRoutingModule,

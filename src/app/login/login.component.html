@@ -15,7 +15,7 @@
           <label for="mdp">Mot de passe: </label>
           <input type="password" class="form-control" id="mdp" formControlName="mdp" [ngClass]="{ 'invalid': !marsuForm.controls.mdp.valid && marsuForm.controls.mdp.dirty }">
         </div>
-        <button class="btn waves-effect waves-light pulse yellow accent-4 black-text" type="submit" name="action" [disabled]="!marsuForm.valid">
+          <button class="btn waves-effect waves-light pulse yellow accent-4 black-text" type="submit" name="action" [disabled]="!marsuForm.valid">
           Login
         </button>
       </form>

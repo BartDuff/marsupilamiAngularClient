@@ -8,6 +8,8 @@ import { Marsupilami } from './marsupilami';
 })
 export class AuthenticationService {
   isAuth: boolean;
+  isAdmin: boolean;
+  isAdminChange: Subject<boolean> = new Subject<boolean>();
   isAuthChange: Subject<boolean> = new Subject<boolean>();
   currentUser: Marsupilami;
   isCurrentUser: Subject<Marsupilami> = new Subject<Marsupilami>();
@@ -17,6 +19,7 @@ export class AuthenticationService {
   constructor(private http: HttpClient) {
     this.currentUser = null;
     this.isAuth = false;
+    this.isAdmin = false;
   }
 
   emitCredentials() {
@@ -26,6 +29,7 @@ export class AuthenticationService {
 
   login(body: any): Observable<any> {
     this.isAuth = true;
+    if (body.isAdmin) {this.isAdmin = true; }
     this.emitCredentials();
     return this.http.post(`${this.apiLogin}`, body);
   }

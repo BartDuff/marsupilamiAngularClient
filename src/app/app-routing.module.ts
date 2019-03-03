@@ -8,6 +8,7 @@ import { MarsupilamiRegistrationComponent } from './marsupilami-registration/mar
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth-guard.service';
 import { FriendListComponent } from './friend-list/friend-list.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'marsupilamis', canActivate: [AuthGuard], component: MarsupilamiListComponent },
   { path: 'amis', canActivate: [AuthGuard], component: FriendListComponent },
   { path: 'marsupilamis/:id', canActivate: [AuthGuard], component: MarsupilamiDetailsComponent },
+  { path: 'admin', canActivate: [AuthGuard], component: AdminComponent },
   { path: '', redirectTo: 'marsupilamis', pathMatch: 'full'},
   { path: '**', component: NotFoundComponent }
 ];
