@@ -1,0 +1,69 @@
+<button *ngIf="!showCheckboxes" 
+(click)="showCheckboxes=true">
+batch update
+</button>
+<label *ngIf="showCheckboxes&&checkedItems.length>0">
+  <span>set nourriture for selected:</span>
+  <select #newNourr class="browser-default" 
+  (change)="updateBatch(newNourr.value)">  
+    <option *ngFor="let n of nourritures | async" [value]="n">
+      {{n}}
+    </option>
+  </select>
+</label>
+<!-- <p style="white-space:pre-wrap ">
+  {{s(checkedItems)}}
+
+</p> -->
+<table>
+  <tr>
+    <th>
+        <!-- <label *ngIf="showCheckboxes">
+            <input #selectAll
+            (change)="selectAll()"
+            type=checkbox >
+            <span>all</span>
+       </label>    -->
+    </th>
+    <th>login</th>
+    <th>famille</th>
+    <th>race</th>
+    <th>nourriture</th>
+  </tr>
+  <tr *ngFor="let m of marsupilamis | async">
+      <td> 
+          <label *ngIf="showCheckboxes">
+              <input #selected 
+              (change)="selected.checked?checkedItems.push(m):checkedItems.splice(checkedItems.indexOf(m),1)"
+              type=checkbox 
+             
+              >
+              <span>Red</span>
+         </label>        
+      </td>
+      <td>{{ m.login }}</td>
+      <td>{{ m.famille }}</td>
+      <td>{{ m.race }}</td>
+      <td>  
+        <select class="browser-default" (change)="saveMarsupilami(m)"
+                 [(ngModel)]="m.nourriture">
+            <option *ngFor="let n of nourritures | async" [value]="n">
+            set new: {{n}}
+            </option>
+        </select>
+
+  
+        
+
+
+
+         <hr>
+       current: {{ m.nourriture }} 
+
+      </td>
+  </tr>
+</table>
+
+
+
+
